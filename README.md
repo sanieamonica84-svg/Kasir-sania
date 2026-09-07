@@ -1,1 +1,1364 @@
-# Kasir-sania
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Kasir Sania</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <h1>🌸 KASIR SANIA</h1>
+        <p>Web Aplikasi Kasir</p>
+    </header>
+
+
+    <main class="container">
+
+        <!-- TAMBAH PRODUK -->
+        <section class="card">
+
+            <h2>🛍️ Tambah Produk</h2>
+
+            <div class="form-produk">
+
+                <div>
+                    <label>Nama Produk</label>
+                    <input
+                        type="text"
+                        id="namaProduk"
+                        placeholder="Contoh: Es Teh"
+                    >
+                </div>
+
+                <div>
+                    <label>Harga</label>
+                    <input
+                        type="number"
+                        id="hargaProduk"
+                        placeholder="Contoh: 5000"
+                        min="0"
+                    >
+                </div>
+
+                <div>
+                    <label>Jumlah</label>
+                    <input
+                        type="number"
+                        id="jumlahProduk"
+                        value="1"
+                        min="1"
+                    >
+                </div>
+
+                <button onclick="tambahProduk()">
+                    + Tambah
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- KERANJANG -->
+        <section class="card">
+
+            <div class="judul">
+
+                <h2>🛒 Keranjang Belanja</h2>
+
+                <button
+                    class="btn-reset"
+                    onclick="hapusSemua()"
+                >
+                    Hapus Semua
+                </button>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>No</th>
+                            <th>Produk</th>
+                            <th>Harga</th>
+                            <th>Jumlah</th>
+                            <th>Subtotal</th>
+                            <th>Aksi</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tabelProduk">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <div
+                id="pesanKosong"
+                class="kosong"
+            >
+                Keranjang masih kosong.
+            </div>
+
+
+            <div class="total-box">
+
+                <span>Total Belanja</span>
+
+                <strong id="total">
+                    Rp 0
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- PEMBAYARAN -->
+        <section class="card">
+
+            <h2>💰 Pembayaran</h2>
+
+
+            <div class="pembayaran">
+
+                <div>
+                    <label>Uang Pembayaran</label>
+
+                    <input
+                        type="number"
+                        id="uangBayar"
+                        placeholder="Masukkan jumlah uang"
+                        min="0"
+                    >
+                </div>
+
+
+                <button
+                    onclick="hitungKembalian()"
+                    class="btn-hitung"
+                >
+                    Hitung Kembalian
+                </button>
+
+            </div>
+
+
+            <div class="kembalian">
+
+                <span>Kembalian</span>
+
+                <strong id="hasilKembalian">
+                    Rp 0
+                </strong>
+
+            </div>
+
+
+            <button
+                onclick="selesaikanTransaksi()"
+                class="btn-bayar"
+            >
+                ✅ Selesaikan Transaksi
+            </button>
+
+        </section>
+
+
+        <!-- STRUK -->
+        <section
+            class="card struk"
+            id="struk"
+        >
+
+            <div class="struk-header">
+
+                <h2>🧾 STRUK PEMBAYARAN</h2>
+
+                <h3>KASIR SANIA</h3>
+
+                <p id="tanggal"></p>
+
+            </div>
+
+
+            <div id="isiStruk">
+
+            </div>
+
+
+            <div class="garis"></div>
+
+
+            <div class="struk-total">
+
+                <span>Total</span>
+
+                <strong id="strukTotal">
+                    Rp 0
+                </strong>
+
+            </div>
+
+
+            <div class="struk-total">
+
+                <span>Bayar</span>
+
+                <strong id="strukBayar">
+                    Rp 0
+                </strong>
+
+            </div>
+
+
+            <div class="struk-total">
+
+                <span>Kembalian</span>
+
+                <strong id="strukKembalian">
+                    Rp 0
+                </strong>
+
+            </div>
+
+
+            <p class="terima">
+                Terima kasih sudah berbelanja 💗
+            </p>
+
+
+            <button
+                onclick="window.print()"
+                class="btn-print"
+            >
+                🖨️ Cetak Struk
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <p>
+            © 2026 Kasir Sania
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+
+/* =========================
+   BODY
+========================= */
+
+body {
+    background: #fff0f6;
+    color: #333;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    background: linear-gradient(
+        135deg,
+        #ff69b4,
+        #ff1493
+    );
+
+    color: white;
+
+    text-align: center;
+
+    padding: 30px 15px;
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,0.15);
+}
+
+
+header h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+
+header p {
+    font-size: 16px;
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+    width: 92%;
+    max-width: 1100px;
+
+    margin: 25px auto;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.card {
+    background: white;
+
+    padding: 25px;
+
+    margin-bottom: 20px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 5px 15px rgba(255,20,147,0.12);
+}
+
+
+.card h2 {
+    color: #d41475;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================
+   FORM PRODUK
+========================= */
+
+.form-produk {
+    display: grid;
+
+    grid-template-columns:
+        2fr
+        1fr
+        0.7fr
+        auto;
+
+    gap: 12px;
+
+    align-items: end;
+}
+
+
+label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-weight: bold;
+
+    color: #555;
+}
+
+
+input {
+    width: 100%;
+
+    padding: 13px;
+
+    border: 2px solid #f5bfd8;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    font-size: 15px;
+}
+
+
+input:focus {
+    border-color: #ff1493;
+
+    box-shadow:
+        0 0 0 3px rgba(255,20,147,0.1);
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+button {
+    border: none;
+
+    border-radius: 9px;
+
+    padding: 13px 18px;
+
+    background: #ff1493;
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+button:hover {
+    background: #d41475;
+}
+
+
+/* =========================
+   JUDUL KERANJANG
+========================= */
+
+.judul {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.judul h2 {
+    margin-bottom: 20px;
+}
+
+
+.btn-reset {
+    background: #777;
+
+    margin-bottom: 20px;
+}
+
+
+.btn-reset:hover {
+    background: #555;
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+.table-container {
+    overflow-x: auto;
+}
+
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 700px;
+}
+
+
+th {
+    background: #ffd9eb;
+
+    color: #a30d59;
+
+    padding: 13px;
+}
+
+
+td {
+    padding: 13px;
+
+    text-align: center;
+
+    border-bottom:
+        1px solid #f5d6e5;
+}
+
+
+td:nth-child(2) {
+    text-align: left;
+}
+
+
+.btn-hapus {
+    background: #e74c3c;
+
+    padding: 8px 12px;
+
+    font-size: 12px;
+}
+
+
+.btn-hapus:hover {
+    background: #c0392b;
+}
+
+
+.kosong {
+    text-align: center;
+
+    color: #999;
+
+    padding: 25px;
+}
+
+
+/* =========================
+   TOTAL
+========================= */
+
+.total-box {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: 20px;
+
+    padding: 18px;
+
+    background: #fff0f6;
+
+    border-radius: 10px;
+
+    font-size: 19px;
+}
+
+
+.total-box strong {
+    color: #ff1493;
+
+    font-size: 23px;
+}
+
+
+/* =========================
+   PEMBAYARAN
+========================= */
+
+.pembayaran {
+    display: grid;
+
+    grid-template-columns: 1fr auto;
+
+    gap: 12px;
+
+    align-items: end;
+}
+
+
+.btn-hitung {
+    height: 45px;
+}
+
+
+.kembalian {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: 18px;
+
+    padding: 18px;
+
+    background: #fff0f6;
+
+    border-radius: 10px;
+}
+
+
+.kembalian strong {
+    color: #159447;
+
+    font-size: 22px;
+}
+
+
+.btn-bayar {
+    width: 100%;
+
+    margin-top: 15px;
+
+    background: #28a745;
+
+    font-size: 16px;
+}
+
+
+.btn-bayar:hover {
+    background: #218838;
+}
+
+
+/* =========================
+   STRUK
+========================= */
+
+.struk {
+    display: none;
+}
+
+
+.struk-header {
+    text-align: center;
+
+    margin-bottom: 20px;
+}
+
+
+.struk-header h2 {
+    margin-bottom: 8px;
+}
+
+
+.struk-header h3 {
+    color: #ff1493;
+
+    margin-bottom: 5px;
+}
+
+
+.struk-header p {
+    color: #777;
+
+    font-size: 13px;
+}
+
+
+.struk-item {
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 8px 0;
+}
+
+
+.garis {
+    border-top: 2px dashed #aaa;
+
+    margin: 12px 0;
+}
+
+
+.struk-total {
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 7px 0;
+
+    font-weight: bold;
+}
+
+
+.terima {
+    text-align: center;
+
+    margin-top: 20px;
+
+    color: #ff1493;
+
+    font-weight: bold;
+}
+
+
+.btn-print {
+    display: block;
+
+    margin: 20px auto 0;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    text-align: center;
+
+    padding: 20px;
+
+    color: #999;
+}
+
+
+/* =========================
+   RESPONSIVE HP
+========================= */
+
+@media (max-width: 700px) {
+
+    header h1 {
+        font-size: 26px;
+    }
+
+
+    .container {
+        width: 94%;
+    }
+
+
+    .card {
+        padding: 17px;
+    }
+
+
+    .form-produk {
+        grid-template-columns: 1fr;
+    }
+
+
+    .form-produk button {
+        width: 100%;
+    }
+
+
+    .pembayaran {
+        grid-template-columns: 1fr;
+    }
+
+
+    .btn-hitung {
+        width: 100%;
+    }
+
+
+    .judul {
+        align-items: flex-start;
+    }
+
+
+    .total-box {
+        font-size: 16px;
+    }
+
+
+    .total-box strong {
+        font-size: 19px;
+    }
+
+}
+
+
+/* =========================
+   PRINT
+========================= */
+
+@media print {
+
+    body {
+        background: white;
+    }
+
+
+    header,
+    footer,
+    .form-produk,
+    .judul .btn-reset,
+    .pembayaran,
+    .btn-hapus,
+    th:last-child,
+    td:last-child,
+    .btn-print {
+        display: none !important;
+    }
+
+
+    .container {
+        width: 100%;
+        margin: 0;
+    }
+
+
+    .card {
+        box-shadow: none;
+        border: none;
+    }
+
+
+    .struk {
+        display: block !important;
+    }
+
+}
+
+// ========================================
+// DATA KERANJANG
+// ========================================
+
+let keranjang = [];
+
+
+// ========================================
+// FORMAT RUPIAH
+// ========================================
+
+function rupiah(angka) {
+
+    return new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR",
+        minimumFractionDigits: 0
+    }).format(angka);
+
+}
+
+
+// ========================================
+// TAMBAH PRODUK
+// ========================================
+
+function tambahProduk() {
+
+    const nama =
+        document.getElementById("namaProduk")
+        .value
+        .trim();
+
+    const harga =
+        Number(
+            document.getElementById("hargaProduk").value
+        );
+
+    const jumlah =
+        Number(
+            document.getElementById("jumlahProduk").value
+        );
+
+
+    // Validasi
+
+    if (nama === "") {
+
+        alert("Nama produk belum diisi!");
+
+        return;
+    }
+
+
+    if (harga <= 0) {
+
+        alert("Harga harus lebih dari 0!");
+
+        return;
+    }
+
+
+    if (jumlah <= 0) {
+
+        alert("Jumlah harus lebih dari 0!");
+
+        return;
+    }
+
+
+    // Masukkan produk
+
+    keranjang.push({
+
+        nama: nama,
+
+        harga: harga,
+
+        jumlah: jumlah
+
+    });
+
+
+    // Kosongkan form
+
+    document.getElementById("namaProduk").value = "";
+
+    document.getElementById("hargaProduk").value = "";
+
+    document.getElementById("jumlahProduk").value = 1;
+
+
+    // Tampilkan
+
+    tampilkanKeranjang();
+
+}
+
+
+// ========================================
+// TAMPILKAN KERANJANG
+// ========================================
+
+function tampilkanKeranjang() {
+
+    const tabel =
+        document.getElementById("tabelProduk");
+
+    const pesan =
+        document.getElementById("pesanKosong");
+
+
+    tabel.innerHTML = "";
+
+
+    if (keranjang.length === 0) {
+
+        pesan.style.display = "block";
+
+    } else {
+
+        pesan.style.display = "none";
+
+    }
+
+
+    let total = 0;
+
+
+    keranjang.forEach((produk, index) => {
+
+        const subtotal =
+            produk.harga * produk.jumlah;
+
+
+        total += subtotal;
+
+
+        const baris =
+            document.createElement("tr");
+
+
+        baris.innerHTML = `
+
+            <td>
+                ${index + 1}
+            </td>
+
+            <td>
+                ${escapeHTML(produk.nama)}
+            </td>
+
+            <td>
+                ${rupiah(produk.harga)}
+            </td>
+
+            <td>
+                ${produk.jumlah}
+            </td>
+
+            <td>
+                ${rupiah(subtotal)}
+            </td>
+
+            <td>
+
+                <button
+                    class="btn-hapus"
+                    onclick="hapusProduk(${index})"
+                >
+                    Hapus
+                </button>
+
+            </td>
+
+        `;
+
+
+        tabel.appendChild(baris);
+
+    });
+
+
+    document.getElementById("total")
+        .textContent = rupiah(total);
+
+}
+
+
+// ========================================
+// HAPUS SATU PRODUK
+// ========================================
+
+function hapusProduk(index) {
+
+    keranjang.splice(index, 1);
+
+    tampilkanKeranjang();
+
+
+    document.getElementById(
+        "hasilKembalian"
+    ).textContent = "Rp 0";
+
+}
+
+
+// ========================================
+// HAPUS SEMUA
+// ========================================
+
+function hapusSemua() {
+
+    if (keranjang.length === 0) {
+
+        return;
+    }
+
+
+    const yakin =
+        confirm(
+            "Apakah kamu yakin ingin menghapus semua produk?"
+        );
+
+
+    if (yakin) {
+
+        keranjang = [];
+
+        tampilkanKeranjang();
+
+
+        document.getElementById(
+            "uangBayar"
+        ).value = "";
+
+
+        document.getElementById(
+            "hasilKembalian"
+        ).textContent = "Rp 0";
+
+    }
+
+}
+
+
+// ========================================
+// HITUNG TOTAL
+// ========================================
+
+function hitungTotal() {
+
+    let total = 0;
+
+
+    keranjang.forEach(produk => {
+
+        total +=
+            produk.harga *
+            produk.jumlah;
+
+    });
+
+
+    return total;
+
+}
+
+
+// ========================================
+// HITUNG KEMBALIAN
+// ========================================
+
+function hitungKembalian() {
+
+    if (keranjang.length === 0) {
+
+        alert(
+            "Keranjang masih kosong!"
+        );
+
+        return;
+    }
+
+
+    const total =
+        hitungTotal();
+
+
+    const bayar =
+        Number(
+            document.getElementById(
+                "uangBayar"
+            ).value
+        );
+
+
+    if (bayar <= 0) {
+
+        alert(
+            "Masukkan uang pembayaran!"
+        );
+
+        return;
+    }
+
+
+    if (bayar < total) {
+
+        const kurang =
+            total - bayar;
+
+
+        document.getElementById(
+            "hasilKembalian"
+        ).textContent =
+            "Kurang " + rupiah(kurang);
+
+
+        alert(
+            "Uang pembayaran kurang " +
+            rupiah(kurang)
+        );
+
+        return;
+    }
+
+
+    const kembalian =
+        bayar - total;
+
+
+    document.getElementById(
+        "hasilKembalian"
+    ).textContent =
+        rupiah(kembalian);
+
+}
+
+
+// ========================================
+// SELESAIKAN TRANSAKSI
+// ========================================
+
+function selesaikanTransaksi() {
+
+    if (keranjang.length === 0) {
+
+        alert(
+            "Keranjang masih kosong!"
+        );
+
+        return;
+    }
+
+
+    const total =
+        hitungTotal();
+
+
+    const bayar =
+        Number(
+            document.getElementById(
+                "uangBayar"
+            ).value
+        );
+
+
+    if (bayar <= 0) {
+
+        alert(
+            "Masukkan uang pembayaran!"
+        );
+
+        return;
+    }
+
+
+    if (bayar < total) {
+
+        alert(
+            "Uang pembayaran belum cukup!"
+        );
+
+        return;
+    }
+
+
+    const kembalian =
+        bayar - total;
+
+
+    // Tanggal
+
+    const sekarang =
+        new Date();
+
+
+    const tanggal =
+        sekarang.toLocaleString(
+            "id-ID"
+        );
+
+
+    document.getElementById(
+        "tanggal"
+    ).textContent =
+        tanggal;
+
+
+    // Isi struk
+
+    const isi =
+        document.getElementById(
+            "isiStruk"
+        );
+
+
+    isi.innerHTML = "";
+
+
+    keranjang.forEach(produk => {
+
+        const subtotal =
+            produk.harga *
+            produk.jumlah;
+
+
+        const item =
+            document.createElement("div");
+
+
+        item.className =
+            "struk-item";
+
+
+        item.innerHTML = `
+
+            <span>
+                ${escapeHTML(produk.nama)}
+                x${produk.jumlah}
+            </span>
+
+            <span>
+                ${rupiah(subtotal)}
+            </span>
+
+        `;
+
+
+        isi.appendChild(item);
+
+    });
+
+
+    // Data pembayaran
+
+    document.getElementById(
+        "strukTotal"
+    ).textContent =
+        rupiah(total);
+
+
+    document.getElementById(
+        "strukBayar"
+    ).textContent =
+        rupiah(bayar);
+
+
+    document.getElementById(
+        "strukKembalian"
+    ).textContent =
+        rupiah(kembalian);
+
+
+    // Tampilkan struk
+
+    document.getElementById(
+        "struk"
+    ).style.display = "block";
+
+
+    // Scroll
+
+    document.getElementById(
+        "struk"
+    ).scrollIntoView({
+        behavior: "smooth"
+    });
+
+
+    alert(
+        "Transaksi berhasil! 💗"
+    );
+
+}
+
+
+// ========================================
+// MENCEGAH HTML BERBAHAYA
+// ========================================
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+
+}
+
+
+// ========================================
+// ENTER UNTUK TAMBAH PRODUK
+// ========================================
+
+document
+    .getElementById("jumlahProduk")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Enter") {
+
+                tambahProduk();
+
+            }
+
+        }
+    );
+
+
+// ========================================
+// JALANKAN SAAT WEB DIBUKA
+// ========================================
+
+tampilkanKeranjang();
