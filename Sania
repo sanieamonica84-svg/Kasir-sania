@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Kasir Sania</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <h1>🌸 KASIR SANIA</h1>
+        <p>Web Aplikasi Kasir</p>
+    </header>
+
+
+    <main class="container">
+
+        <!-- TAMBAH PRODUK -->
+        <section class="card">
+
+            <h2>🛍️ Tambah Produk</h2>
+
+            <div class="form-produk">
+
+                <div>
+                    <label>Nama Produk</label>
+                    <input
+                        type="text"
+                        id="namaProduk"
+                        placeholder="Contoh: Es Teh"
+                    >
+                </div>
+
+                <div>
+                    <label>Harga</label>
+                    <input
+                        type="number"
+                        id="hargaProduk"
+                        placeholder="Contoh: 5000"
+                        min="0"
+                    >
+                </div>
+
+                <div>
+                    <label>Jumlah</label>
+                    <input
+                        type="number"
+                        id="jumlahProduk"
+                        value="1"
+                        min="1"
+                    >
+                </div>
+
+                <button onclick="tambahProduk()">
+                    + Tambah
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- KERANJANG -->
+        <section class="card">
+
+            <div class="judul">
+
+                <h2>🛒 Keranjang Belanja</h2>
+
+                <button
+                    class="btn-reset"
+                    onclick="hapusSemua()"
+                >
+                    Hapus Semua
+                </button>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>No</th>
+                            <th>Produk</th>
+                            <th>Harga</th>
+                            <th>Jumlah</th>
+                            <th>Subtotal</th>
+                            <th>Aksi</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tabelProduk">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <div
+                id="pesanKosong"
+                class="kosong"
+            >
+                Keranjang masih kosong.
+            </div>
+
+
+            <div class="total-box">
+
+                <span>Total Belanja</span>
+
+                <strong id="total">
+                    Rp 0
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- PEMBAYARAN -->
+        <section class="card">
+
+            <h2>💰 Pembayaran</h2>
+
+
+            <div class="pembayaran">
+
+                <div>
+                    <label>Uang Pembayaran</label>
+
+                    <input
+                        type="number"
+                        id="uangBayar"
+                        placeholder="Masukkan jumlah uang"
+                        min="0"
+                    >
+                </div>
+
+
+                <button
+                    onclick="hitungKembalian()"
+                    class="btn-hitung"
+                >
+                    Hitung Kembalian
+                </button>
+
+            </div>
+
+
+            <div class="kembalian">
+
+                <span>Kembalian</span>
+
+                <strong id="hasilKembalian">
+                    Rp 0
+                </strong>
+
+            </div>
+
+
+            <button
+                onclick="selesaikanTransaksi()"
+                class="btn-bayar"
+            >
+                ✅ Selesaikan Transaksi
+            </button>
+
+        </section>
+
+
+        <!-- STRUK -->
+        <section
+            class="card struk"
+            id="struk"
+        >
+
+            <div class="struk-header">
+
+                <h2>🧾 STRUK PEMBAYARAN</h2>
+
+                <h3>KASIR SANIA</h3>
+
+                <p id="tanggal"></p>
+
+            </div>
+
+
+            <div id="isiStruk">
+
+            </div>
+
+
+            <div class="garis"></div>
+
+
+            <div class="struk-total">
+
+                <span>Total</span>
+
+                <strong id="strukTotal">
+                    Rp 0
+                </strong>
+
+            </div>
+
+
+            <div class="struk-total">
+
+                <span>Bayar</span>
+
+                <strong id="strukBayar">
+                    Rp 0
+                </strong>
+
+            </div>
+
+
+            <div class="struk-total">
+
+                <span>Kembalian</span>
+
+                <strong id="strukKembalian">
+                    Rp 0
+                </strong>
+
+            </div>
+
+
+            <p class="terima">
+                Terima kasih sudah berbelanja 💗
+            </p>
+
+
+            <button
+                onclick="window.print()"
+                class="btn-print"
+            >
+                🖨️ Cetak Struk
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <p>
+            © 2026 Kasir Sania
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
